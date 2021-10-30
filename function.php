@@ -45,13 +45,13 @@ class admin
                     <div class="col-sm">
                       <div class="form-group">
                         <label for="input">title</label>
-                        <input type="text" class="form-control" id="input" name="title" require/>
+                        <input type="text" class="form-control" id="input" name="title" require />
                       </div>
                     </div>
                     <div class="col-sm">
                       <div class="form-group">
                         <label for="input">color</label>
-                        <input type="color" class="form-control" id="input" name="color"/>
+                        <input type="color" class="form-control" id="input" name="color" />
                       </div>
                     </div>
                   </div>
@@ -59,13 +59,13 @@ class admin
                     <div class="col-sm">
                       <div class="form-group">
                         <label for="start-date">start</label>
-                        <input type="date" class="form-control" id="start-date"  name="start_date" require/>
+                        <input type="date" class="form-control" id="start-date" name="start_date" require />
                       </div>
                     </div>
                     <div class="col-sm">
                       <div class="form-group">
                         <label for="end-date">end</label>
-                        <input type="date" class="form-control" id="end-date" name="end_date" require/>
+                        <input type="date" class="form-control" id="end-date" name="end_date" require />
                       </div>
                     </div>
                   </div>
@@ -73,8 +73,9 @@ class admin
                     <div class="col-sm">
                       <div class="form-group">
                         <label for="textarea-description">decription</label>
-                       <textarea  class="form-control" id="textarea-description"  name="description" rows="5"></textarea>
-                        <?php //wp_editor( '', 'textarea-description' ); ?>
+                        <textarea class="form-control" id="textarea-description" name="description" rows="5"></textarea>
+                        <?php //wp_editor( '', 'textarea-description' ); 
+                        ?>
                       </div>
                     </div>
                   </div>
@@ -82,19 +83,19 @@ class admin
                     <div class="col-3">
                       <div class="form-group">
                         <label for="cover">cover</label>
-                        <input type="file" onchange="preview_show('cover-preview',true)" class="form-control" id="cover"  name="cover"/>
+                        <input type="file" onchange="preview_show('cover-preview',true)" class="form-control" id="cover" name="cover" />
                       </div>
                     </div>
                     <div class="col-sm">
-                       <img id="cover-preview" style="width:200px;height:200px;display:none"/>
+                      <img id="cover-preview" style="width:200px;height:200px;display:none" />
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-sm">
                       <div class="form-group">
-                        <input type="hidden" name="add_event"/>
-                      <button type="button"  class="btn btn-success w-100" id="add-event-btn" onclick="form_send('.form-add-event','<?php echo plugins_url('/',__FILE__) ?>','add-event-btn')">add event</button>
-                      </div> 
+                        <input type="hidden" name="add_event" />
+                        <button type="button" class="btn btn-success w-100" id="add-event-btn" onclick="form_send('.form-add-event','<?php echo plugins_url('/', __FILE__) ?>','add-event-btn')">add event</button>
+                      </div>
                     </div>
                   </div>
                 </form>
@@ -131,20 +132,7 @@ function addtomenu()
   $admin = new admin();
   add_menu_page('copo', 'copo', 'manage_options', 'copo', array($admin, "create_porgram"));
 }
-function create_table(){
-  dbDelta("CREATE TABLE  copo_plugin  (
-    id  int NOT NULL AUTO_INCREMENT,
-    title  varchar(355) DEFAULT NULL,
-    description  text,
-    cover  varchar(500) DEFAULT NULL,
-    files  json DEFAULT NULL,
-    color  varchar(255) NOT NULL,
-    start_date  varchar(355) NOT NULL,
-    end_date  varchar(355) NOT NULL,
-    date  timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-   PRIMARY KEY (id)
- ) ");
-}
+
 function asset()
 {
   //scripts
@@ -187,4 +175,3 @@ add_action('init', "asset");
 add_action("admin_menu", "addtomenu");
 add_action('admin_enqueue_scripts', 'asset');
 add_action('wp_enqueue_scripts', 'asset');
-register_activation_hook( __FILE__, 'create_table' );
